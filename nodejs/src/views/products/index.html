@@ -1,0 +1,10 @@
+{% extends "baseLayout.html" %} {% block content %}
+
+<p>List of Products</p>
+<ul>
+	{% for product in products %}
+	<li><a href={{"/products/"+product._id}}>{{product.title}}</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
