@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 
 const controllers = require('./src/controllers');
+const errorHandler = require('./src/middleware/errorHandler');
 
 let app = express();
 
@@ -27,16 +28,11 @@ app.set('view engine', 'njk');
 app.use(controllers);
 
 //Error Handling
-app.use(function(err, req, res, next) {
-	// set locals, only providing error in development
-	console.error(err);
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-	// render the error page
-	res.status(err.status || 500);
-	res.render('error');
-});
+if (app.get('env') != 'production') {
+	app.use(errorHandler['dev']);
+} else {
+	app.use(errorHandler['prod'])
+}
 
 module.exports = app;
 
