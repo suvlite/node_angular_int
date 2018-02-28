@@ -1,10 +1,8 @@
 {% extends "baseLayout.html" %} {% block content %}
-
-<p>List of Products</p>
-<ul>
+<h4>List of Products</h4>
+<div class="list-group">
 	{% for product in products %}
-	<li><a href={{"/products/"+product._id}}>{{product.title}}</a></li>
+	<a class="list-group-item list-group-item-action" href={{"/products/"+product._id}}>{{product.title}}</a>
 	{% endfor %}
-</ul>
-
+</div>
 {% endblock %}
